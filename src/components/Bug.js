@@ -7,6 +7,7 @@ export default class Bug extends React.Component {
     constructor(props) {
         super(props);
         this.onHeaderClicked = this.onHeaderClicked.bind(this);
+        this.changeBugStatus = this.changeBugStatus.bind(this);
         this.state = {
             showDescription: false
         };
@@ -27,7 +28,7 @@ export default class Bug extends React.Component {
                   {this.props.data.description}
                 </div>
                 <div className="pt-2">
-                  <ActionButton status={this.props.data.status} />
+                  <ActionButton status={this.props.data.status} actionCallback={this.changeBugStatus}/>
                 </div>
               </div>
             </div>
@@ -38,5 +39,9 @@ export default class Bug extends React.Component {
         this.setState(state => ({
             showDescription: !state.showDescription
         }));
+    }
+    
+    changeBugStatus() {
+        this.props.changeBugStatusCallback(this.props.data.id);
     }
 }

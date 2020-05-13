@@ -1,3 +1,8 @@
+export const BugStatusEnum = {
+    Opened: 0,
+    Resolve: 1
+};
+
 export const bugStatus = [
     'Opened',
     'Resolved'

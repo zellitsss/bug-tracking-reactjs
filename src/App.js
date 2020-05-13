@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Bug from './components/Bug';
+import {BugStatusEnum} from './definitions';
 
 const bugs = [
   {
@@ -44,11 +45,15 @@ const bugs = [
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.bugs = bugs;
+    this.state = {
+      bugs: bugs
+    };
+
+    this.changeBugStatus = this.changeBugStatus.bind(this);
   }
   render() {
-    let bugsList = this.bugs.map((bug) =>
-      <Bug data={bug} key={bug.id.toString()} />
+    let bugsList = this.state.bugs.map((bug) =>
+      <Bug data={bug} key={bug.id.toString()} changeBugStatusCallback={this.changeBugStatus}/>
     );
     return (
       <div className="min-h-screen py-8">
@@ -61,6 +66,28 @@ class App extends React.Component {
         </div>
       </div>
     );
+  }
+  
+  changeBugStatus(id) {
+    let bugs = this.state.bugs;
+    let found = bugs.find(bug => {
+      return bug.id === id;
+    });
+    if (found !== undefined) {
+      switch (found.status) {
+        case BugStatusEnum.Opened:
+          found.status = BugStatusEnum.Resolve;
+          break;
+        case BugStatusEnum.Resolve:
+          found.status = BugStatusEnum.Opened;
+          break;
+        default:
+          break;
+      }
+      this.setState({
+        bugs: bugs
+      });
+    }
   }
 }
 
