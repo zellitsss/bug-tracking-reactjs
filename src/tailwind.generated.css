@@ -14355,16 +14355,22 @@ video {
   --bg-opacity: 1;
   background-color: #fff;
   background-color: rgba(255, 255, 255, var(--bg-opacity));
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
   margin-top: 0.5rem;
 }
 
 .bug-header {
   text-align: left;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   font-weight: 700;
+}
+
+.bug-header:hover {
+  --bg-opacity: 1;
+  background-color: #edf2f7;
+  background-color: rgba(237, 242, 247, var(--bg-opacity));
 }
 
 .bug-badge {
@@ -14395,7 +14401,8 @@ video {
 .bug-description {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .action-btn {

@@ -7,11 +7,15 @@
 }
 
 .bug-item {
-    @apply bg-white py-2 mt-2;
+    @apply bg-white mt-2;
 }
 
 .bug-header {
-    @apply text-left px-2 font-bold;
+    @apply text-left py-2 px-2 font-bold;
+}
+
+.bug-header:hover {
+    @apply bg-gray-200;
 }
 
 .bug-badge {
@@ -27,7 +31,7 @@
 }
 
 .bug-description {
-    @apply px-2 pt-4;
+    @apply px-2 py-2;
 }
 
 .action-btn {
