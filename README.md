@@ -1,5 +1,14 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Intro
+
+It's Todo-like project
+
+Some basic functions are: Add new bug, change the bug status
+I'm building an API for this project, so more functionalities will come too
+
+![Screenshot](https://github.com/zellitsss/bug-tracking-reactjs/raw/master/screenshot.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
