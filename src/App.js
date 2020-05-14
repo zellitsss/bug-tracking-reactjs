@@ -46,10 +46,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      bugs: bugs
+      bugs: bugs.sort((a, b) => b.id >= a.id),
+      isEditting: false,
+      edittingName: '',
+      edittingDescription: ''
     };
 
     this.changeBugStatus = this.changeBugStatus.bind(this);
+    this.changeEdittingState = this.changeEdittingState.bind(this);
+    this.addNewBugRecord = this.addNewBugRecord.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
   }
   render() {
     let bugsList = this.state.bugs.map((bug) =>
@@ -59,7 +66,25 @@ class App extends React.Component {
       <div className="min-h-screen py-8">
         <div className="max-w-xl mx-auto bg-gray-300 p-4 text-center">
           <header className="app-title">Bugs Tracking</header>
-          <section>filter</section>
+          <section>
+            <div className={this.state.isEditting ? 'hidden' : ''}>
+              <div><button className="action-btn bg-blue-300" onClick={this.changeEdittingState}>Add new Bug</button></div>
+            </div>
+            <div className={this.state.isEditting ? '' : 'hidden'}>
+              <form onSubmit={this.addNewBugRecord}>
+                <div className="mb-2">
+                  <input type="text" placeholder="Bug name" className="w-full px-2 py-1" name="name" value={this.state.edittingName} onChange={this.handleNameChange}/>
+                </div>
+                <div className="mb-2">
+                  <textarea placeholder="Description" className="w-full p-2" name="description" value={this.state.edittingDescription} onChange={this.handleDescriptionChange}></textarea>
+                </div>
+                <div>
+                  <button type="button" className="action-btn bg-gray-500 mx-1" onClick={this.changeEdittingState}>Cancel</button>
+                  <button type="submit" className="action-btn bg-blue-300 mx-1">Add</button>
+                </div>
+              </form>
+            </div>
+          </section>
           <section className="bugs-list">
             {bugsList}
           </section>
@@ -88,6 +113,52 @@ class App extends React.Component {
         bugs: bugs
       });
     }
+  }
+
+  changeEdittingState() {
+    this.setState(state => (
+      {
+        isEditting: !state.isEditting,
+        edittingName: '',
+        edittingDescription: ''
+      }
+    ));
+  }
+
+  addNewBugRecord(event) {
+    if (this.state.edittingName !== '')
+    {
+      let bugs = this.state.bugs;
+      let maxId = Math.max(...bugs.map(bug => bug.id));
+      
+      let bug = {
+        id: maxId + 1,
+        status: BugStatusEnum.Opened,
+        name: this.state.edittingName,
+        description: this.state.edittingDescription
+      };
+      bugs.push(bug);
+      this.setState({
+        bugs: bugs.sort((a, b) => b.id >= a.id)
+      });
+      this.changeEdittingState();
+    } else {
+      
+    }
+
+    event.preventDefault();
+  }
+
+  handleNameChange(event) {
+    this.setState({
+      edittingName: event.target.value
+    });
+  }
+
+  handleDescriptionChange(event) {
+    this.setState({
+      edittingDescription: event.target.value
+    });
   }
 }
 
