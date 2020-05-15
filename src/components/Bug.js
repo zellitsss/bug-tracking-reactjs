@@ -42,6 +42,6 @@ export default class Bug extends React.Component {
     }
     
     changeBugStatus() {
-        this.props.changeBugStatusCallback(this.props.data.id);
+        this.props.changeBugStatusCallback(this.props.data._id);
     }
 }

@@ -6,6 +6,8 @@ It's Todo-like project
 
 Some basic functions are: Add new bug, change the bug status
 I'm building an API for this project, so more functionalities will come too
+API server: [bug-tracking-server](https://github.com/zellitsss/bug-tracking-server)
+Little note here: config the API url in `App.js`
 
 ![Screenshot](https://github.com/zellitsss/bug-tracking-reactjs/raw/master/screenshot.png)
 
